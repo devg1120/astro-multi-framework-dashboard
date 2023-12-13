@@ -1,0 +1,22 @@
+# Reference --> https://github.com/marketplace/actions/deploy-to-github-pages
+
+name: Build and Deploy
+
+on: [push]
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-gh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+
+      - run: yarn install --frozen-lockfile
+
+      - run: yarn build
